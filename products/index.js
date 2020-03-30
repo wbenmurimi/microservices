@@ -25,6 +25,7 @@ mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true, useCr
 
 app.use('/api/products', productRouter);
 
-var server = app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
+  var server = app.listen(port, () => {
+  console.log(`Server is running on port: ${port}`);
+  
 });

@@ -53,29 +53,30 @@ router.post('/logout', auth, async(req, res) => {
     }
 });
 
-// Check if a user is authenticated
-router.post('/checkauth', async(req, res,next) => {
-    try {
-        const token = req.body.token
-        // console.log("Token: "+token)
-        const decoded  = jwt.verify(token,  process.env.JWT_KEY)
-        const user  = await User.findOne({ _id:decoded._id, 'tokens.token': token})
+// // Check if a user is authenticated
+// router.post('/checkauth', async(req, res,next) => {
+//     try {
+//         const token = req.body.token
+//         console.log("Token: "+token)
+//         const decoded  = jwt.verify(token,  process.env.JWT_KEY)
+//         const user  = await User.findOne({ _id:decoded._id, 'tokens.token': token})
 
-        if(!user){
-            throw new Error()
-        }
-        req.token = token
-        req.user = user
-        next()
-        res.status(200).send({"user":req.user,"message":"ok"});
-    } catch (error) {
-        console.log("######")
-        // console.log(error)
-        next()
-        res.status(401).send({error:'Not authorized to access this resource',"message":"no"})
-    }
+//         if(!user){
+//             throw new Error()
+//         }
+//         req.token = token
+//         req.user = user
+//         console.log("authenticated")
+//         next()
+//         res.status(200).send({"user":req.user,"message":"ok"});
+//     } catch (error) {
+//         console.log("######")
+//         // console.log(error)
+//         next()
+//         res.status(401).send({error:'Not authorized to access this resource',"message":"no"})
+//     }
     
-});
+// });
 
 //Get user details given their id
 router.get('/:id', auth, async (req,res) => {
